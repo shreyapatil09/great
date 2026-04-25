@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillThali – Your Skills, Your Future</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav id="mainNav">
+  <div class="nav-logo" onclick="showSection('home')">
+    <img src="logo.jpeg" alt="SkillThali Logo" class="nav-logo-img"
+         onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='flex'">
+    <div class="logo-fallback">
+      <div class="logo-circle"></div>
+      <span class="logo-text">SkillThali</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#" onclick="showSection('home')">Home</a>
+    <a href="#" onclick="showSection('about')">About</a>
+    <a href="#" onclick="showSection('categories')">Categories</a>
+    <a href="#" onclick="openAuth('login')" class="btn-ghost">Login</a>
+    <a href="#" onclick="openAuth('signup')" class="btn-nav">Sign Up</a>
+  </div>
+</nav>
+
+<!-- ========== HOME SECTION ========== -->
+<section id="home" class="section active">
+
+  <div class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="Vedio.mp4" type="video/mp4"/>
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-typing-on-a-laptop-in-a-cozy-office-43648-large.mp4" type="video/mp4"/>
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-heading">Your Skills,<br/><span class="accent">Your Earnings,</span><br/>Your Future</h1>
+      <p class="hero-sub">Connect. Create. Earn. SkillThali serves the right opportunities to hungry, talented students.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showRoleInfo('student')">🎓 I am a Student</button>
+        <button class="btn-secondary" onclick="showRoleInfo('client')">💼 I am a Client</button>
+      </div>
+    </div>
+    <div class="hero-scroll"><span>Scroll to explore</span><div class="scroll-line"></div></div>
+  </div>
+
+  <div id="roleInfoPage" class="role-info-page hidden">
+    <div class="role-info-inner">
+      <button class="role-back-btn" onclick="hideRoleInfo()">← Back</button>
+      <div id="roleInfoContent"></div>
+    </div>
+  </div>
+
+  <div id="categories" class="section-block">
+    <div class="section-header">
+      <div class="section-tag">What We Serve</div>
+      <h2>Browse by Category</h2>
+      <p>Four flavourful categories, countless opportunities.</p>
+    </div>
+    <div class="categories-grid">
+      <div class="cat-card" onclick="openCategory('codethali')"><div class="cat-icon">💻</div><h3>CodeThali</h3><p>Web, App & Debug services</p><div class="cat-arrow">→</div></div>
+      <div class="cat-card" onclick="openCategory('creatix')"><div class="cat-icon">🎨</div><h3>Creatix</h3><p>Design & Logo Creation</p><div class="cat-arrow">→</div></div>
+      <div class="cat-card" onclick="openCategory('quickbites')"><div class="cat-icon">⚡</div><h3>QuickBites</h3><p>LinkedIn, Data Entry & Portfolio</p><div class="cat-arrow">→</div></div>
+      <div class="cat-card" onclick="openCategory('teamup')"><div class="cat-icon">🤝</div><h3>TeamUp</h3><p>Projects, Hackathons & Startups</p><div class="cat-arrow">→</div></div>
+    </div>
+  </div>
+
+  <div id="catPanel" class="cat-panel hidden">
+    <div class="cat-panel-inner">
+      <button class="panel-close" onclick="closeCategory()">✕ Close</button>
+      <div class="cat-panel-header">
+        <span id="panelIcon" class="panel-icon"></span>
+        <h2 id="panelTitle"></h2>
+        <p id="panelSubtitle"></p>
+      </div>
+      <div id="panelItems" class="panel-items"></div>
+      <div id="subDetailPanel" class="sub-detail-panel hidden">
+        <button class="sub-back-btn" onclick="closeSubDetail()">← Back</button>
+        <div id="subDetailContent"></div>
+      </div>
+      <button class="btn-primary mt2" onclick="openAuth('signup')" id="catPanelGetStarted">Get Started →</button>
+    </div>
+  </div>
+
+  <div id="about" class="section-block alt-bg">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-tag">Our Story</div>
+        <h2>About SkillThali</h2>
+        <p>SkillThali is a student-focused freelancing platform designed to connect talented students with clients who need affordable and quality services.</p>
+        <p>The platform enables students to showcase their skills — coding, graphic design, content creation — while working on real-world projects and gaining practical experience.</p>
+        <p>SkillThali helps students build strong portfolios, create earning opportunities, and improve placement readiness through hands-on industry exposure.</p>
+      </div>
+      <div class="about-cards">
+        <div class="stat-card"><span class="stat-num">🎓</span><span>Portfolio Building</span></div>
+        <div class="stat-card"><span class="stat-num">💰</span><span>Real Earnings</span></div>
+        <div class="stat-card"><span class="stat-num">🚀</span><span>Industry Exposure</span></div>
+        <div class="stat-card"><span class="stat-num">🔗</span><span>Smart Connections</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header"><div class="section-tag">Why Us?</div><h2>What Makes SkillThali Unique</h2></div>
+    <div class="unique-grid">
+      <div class="unique-card"><div class="u-icon">🏠</div><h4>Beginner-Friendly</h4><p>No overwhelming competition. Start comfortably as a beginner.</p></div>
+      <div class="unique-card"><div class="u-icon">🎯</div><h4>Focused Environment</h4><p>Student-first space with meaningful work opportunities.</p></div>
+      <div class="unique-card"><div class="u-icon">📚</div><h4>Learn by Doing</h4><p>Gain practical experience through real projects.</p></div>
+      <div class="unique-card"><div class="u-icon">🤝</div><h4>Direct Engagement</h4><p>Students engage directly with clients — no middlemen.</p></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo"><div class="logo-circle sm">ST</div><span>SkillThali</span></div>
+      <p>© 2026 SkillThali. Built for Students, by Students.</p>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+    </div>
+  </footer>
+
+</section>
+
+
+<!-- ========== AUTH MODAL ========== -->
+<div id="authModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="authStep1" class="auth-step active">
+      <div class="modal-logo"><div class="logo-circle">ST</div> SkillThali</div>
+      <h2 id="authTitle">Welcome Back</h2>
+      <p id="authSub">Login to your account</p>
+      <p style="font-size:0.78rem;color:var(--accent);background:rgba(182,187,196,0.08);border:1px solid rgba(182,187,196,0.15);padding:8px 12px;border-radius:8px;margin-bottom:16px;">💡 Admin login: <strong>admin@skillthali.com</strong></p>
+      <div class="form-group" id="authNameGroup" style="display:none">
+        <input type="text" id="authName" placeholder="Full Name" class="form-input" autocomplete="off"/>
+      </div>
+      <div class="form-group">
+        <input type="email" id="authEmail" placeholder="Email Address" class="form-input" autocomplete="off"/>
+      </div>
+      <div class="form-group">
+        <input type="password" id="authPass" placeholder="Password" class="form-input" autocomplete="new-password"/>
+      </div>
+      <button class="btn-primary full" onclick="nextAuthStep()">Continue →</button>
+      <p class="auth-switch" id="authSwitchText">Don't have an account? <a href="#" onclick="toggleAuth()">Sign Up</a></p>
+    </div>
+
+
+
+    
+
+    <div id="authStep2" class="auth-step">
+      <h2>Who are you?</h2>
+      <p>Help us personalise your experience</p>
+      <div class="role-cards">
+        <div class="role-card" onclick="selectRole('student')"><span>🎓</span><h3>Student</h3><p>Find tasks, earn, grow</p></div>
+        <div class="role-card" onclick="selectRole('client')"><span>💼</span><h3>Client</h3><p>Post tasks, hire talent</p></div>
+      </div>
+    </div>
+
+    <div id="onboardS1" class="auth-step onboard-step">
+      <div class="onboard-progress"><div class="onboard-prog-bar"><div style="width:33%"></div></div><span>Step 1 of 3</span></div>
+      <div class="onboard-icon">🎯</div>
+      <h2>What are your primary skills?</h2>
+      <p>Select all that apply</p>
+      <div class="onboard-cards-grid">
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>💻</span><span>Coding</span></div>
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>🎨</span><span>Design</span></div>
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>📊</span><span>PPT / Slides</span></div>
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>🎬</span><span>Video Editing</span></div>
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>🖼️</span><span>Poster Design</span></div>
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>✍️</span><span>Content Writing</span></div>
+      </div>
+      <div class="onboard-nav">
+        <button class="btn-ghost-sm" onclick="goToDashboard('student')">Skip</button>
+        <button class="btn-primary" onclick="showAuthStep('onboardS2')">Next →</button>
+      </div>
+    </div>
+
+    <div id="onboardS2" class="auth-step onboard-step">
+      <div class="onboard-progress"><div class="onboard-prog-bar"><div style="width:66%"></div></div><span>Step 2 of 3</span></div>
+      <div class="onboard-icon">📈</div>
+      <h2>What's your experience level?</h2>
+      <p>This helps us show you the most suitable tasks</p>
+      <div class="onboard-cards-grid single-col">
+        <div class="onboard-choice-card radio-card" onclick="selectRadioCard(this)"><span>🌱</span><div><strong>Beginner</strong><small>I'm just starting out</small></div></div>
+        <div class="onboard-choice-card radio-card" onclick="selectRadioCard(this)"><span>⚡</span><div><strong>Intermediate</strong><small>I have some experience</small></div></div>
+        <div class="onboard-choice-card radio-card" onclick="selectRadioCard(this)"><span>🚀</span><div><strong>Advanced</strong><small>I'm confident in my skills</small></div></div>
+      </div>
+      <div class="onboard-nav">
+        <button class="btn-ghost-sm" onclick="showAuthStep('onboardS1')">← Back</button>
+        <button class="btn-ghost-sm" onclick="goToDashboard('student')">Skip</button>
+        <button class="btn-primary" onclick="showAuthStep('onboardS3')">Next →</button>
+      </div>
+    </div>
+
+    <div id="onboardS3" class="auth-step onboard-step">
+      <div class="onboard-progress"><div class="onboard-prog-bar"><div style="width:100%"></div></div><span>Step 3 of 3</span></div>
+      <div class="onboard-icon">🌍</div>
+      <h2>Ready for real-world projects?</h2>
+      <p>Real projects from real clients</p>
+      <div class="onboard-cards-grid single-col">
+        <div class="onboard-choice-card radio-card" onclick="selectRadioCard(this)"><span>✅</span><div><strong>Yes, I'm ready!</strong><small>Bring on the real work</small></div></div>
+        <div class="onboard-choice-card radio-card" onclick="selectRadioCard(this)"><span>📚</span><div><strong>Still Learning</strong><small>I'd like to start simple</small></div></div>
+      </div>
+      <div class="onboard-nav">
+        <button class="btn-ghost-sm" onclick="showAuthStep('onboardS2')">← Back</button>
+        <button class="btn-primary" onclick="goToDashboard('student')">Go to Dashboard →</button>
+      </div>
+    </div>
+
+    <div id="onboardC1" class="auth-step onboard-step">
+      <div class="onboard-progress"><div class="onboard-prog-bar"><div style="width:33%"></div></div><span>Step 1 of 3</span></div>
+      <div class="onboard-icon">🧩</div>
+      <h2>What type of work do you need?</h2>
+      <p>Select all that apply</p>
+      <div class="onboard-cards-grid">
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>💻</span><span>Web Dev</span></div>
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>🎨</span><span>Design</span></div>
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>✍️</span><span>Content</span></div>
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>📋</span><span>Data Entry</span></div>
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>🎬</span><span>Video</span></div>
+        <div class="onboard-choice-card" onclick="toggleChoice(this)"><span>🔬</span><span>Research</span></div>
+      </div>
+      <div class="onboard-nav">
+        <button class="btn-ghost-sm" onclick="goToDashboard('client')">Skip</button>
+        <button class="btn-primary" onclick="showAuthStep('onboardC2')">Next →</button>
+      </div>
+    </div>
+
+    <div id="onboardC2" class="auth-step onboard-step">
+      <div class="onboard-progress"><div class="onboard-prog-bar"><div style="width:66%"></div></div><span>Step 2 of 3</span></div>
+      <div class="onboard-icon">👥</div>
+      <h2>Preferred candidate level?</h2>
+      <p>Help us find the right talent</p>
+      <div class="onboard-cards-grid single-col">
+        <div class="onboard-choice-card radio-card" onclick="selectRadioCard(this)"><span>🌱</span><div><strong>Beginner</strong><small>Fresh talent, lower cost</small></div></div>
+        <div class="onboard-choice-card radio-card" onclick="selectRadioCard(this)"><span>🏆</span><div><strong>Experienced</strong><small>Quality & proven work</small></div></div>
+        <div class="onboard-choice-card radio-card" onclick="selectRadioCard(this)"><span>🎲</span><div><strong>Any</strong><small>Open to all levels</small></div></div>
+      </div>
+      <div class="onboard-nav">
+        <button class="btn-ghost-sm" onclick="showAuthStep('onboardC1')">← Back</button>
+        <button class="btn-ghost-sm" onclick="goToDashboard('client')">Skip</button>
+        <button class="btn-primary" onclick="showAuthStep('onboardC3')">Next →</button>
+      </div>
+    </div>
+
+    <div id="onboardC3" class="auth-step onboard-step">
+      <div class="onboard-progress"><div class="onboard-prog-bar"><div style="width:100%"></div></div><span>Step 3 of 3</span></div>
+      <div class="onboard-icon">📝</div>
+      <h2>Describe a typical project</h2>
+      <p>This helps students understand your work</p>
+      <div class="form-group" style="margin-top:20px">
+        <textarea class="form-input" placeholder="e.g. Build a portfolio website for college project..." rows="4"></textarea>
+      </div>
+      <div class="onboard-nav">
+        <button class="btn-ghost-sm" onclick="showAuthStep('onboardC2')">← Back</button>
+        <button class="btn-primary" onclick="goToDashboard('client')">Go to Dashboard →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PAYMENT SIMULATION MODAL ========== -->
+<div id="paymentSimModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closePaymentModal()">✕</button>
+    <div class="pay-sim-header">
+      <span class="pay-icon">💳</span>
+      <h2>Secure Payment</h2>
+      <p>Payment held in escrow until task is complete</p>
+    </div>
+    <div class="pay-sim-details">
+      <div class="pay-sim-row">
+        <span>Task</span>
+        <strong id="paySimTaskTitle">—</strong>
+      </div>
+      <div id="paySimFeeBreakdown">
+        <div class="pay-sim-row"><span>Student receives</span><strong style="color:var(--green)">—</strong></div>
+        <div class="pay-sim-row"><span>Platform fee (25%)</span><strong style="color:var(--purple)">—</strong></div>
+        <div class="pay-sim-row total"><span>Total you pay</span><strong id="paySimAmount">—</strong></div>
+      </div>
+    </div>
+    <div class="escrow-notice">
+      <span>🔒</span>
+      <span>Your payment goes into <strong>escrow</strong>. Released to the student only after you approve their work. 25% platform fee applies.</span>
+    </div>
+    <div class="pay-methods">
+      <button class="pay-method-btn active" onclick="selectPayMethod(this)">💳 Card</button>
+      <button class="pay-method-btn" onclick="selectPayMethod(this)">📱 UPI</button>
+      <button class="pay-method-btn" onclick="selectPayMethod(this)">🏦 Net Banking</button>
+    </div>
+    <div id="paySimBody">
+      <button class="btn-primary full" id="paySimConfirmBtn">🔒 Pay & Secure Now</button>
+      <p style="text-align:center;font-size:0.78rem;color:var(--text-dim);margin-top:12px;">🛡️ 100% secure simulation — no real payment</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== UPLOAD WORK MODAL ========== -->
+<div id="uploadWorkModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeUploadWorkModal()">✕</button>
+    <div style="margin-bottom:20px">
+      <span style="font-size:2.5rem;display:block;margin-bottom:12px">📤</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--white);margin-bottom:8px">Submit Your Work</h2>
+      <p style="color:var(--text-dim);font-size:0.9rem">For: <strong id="uploadWorkTaskTitle" style="color:var(--accent)">Task</strong></p>
+    </div>
+    <div id="uploadWorkBody"></div>
+    <div style="display:flex;gap:12px;margin-top:20px">
+      <button class="btn-secondary" onclick="closeUploadWorkModal()" style="flex:1">Cancel</button>
+      <button class="btn-primary" id="uploadWorkConfirmBtn" style="flex:2">📤 Submit Work</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== STUDENT DASHBOARD ========== -->
+<section id="studentDash" class="section dashboard">
+  <div class="dash-nav">
+    <div class="nav-logo" onclick="showSection('home')" style="cursor:pointer">
+      <img src="logo.jpeg" alt="SkillThali" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div style="display:none;align-items:center;gap:10px;"><div class="logo-circle">ST</div><span class="logo-text">SkillThali</span></div>
+    </div>
+    <div class="dash-greeting-inline" id="studentGreeting">Welcome back 👋</div>
+    <div class="dash-sidebar-toggle" onclick="toggleSidebar()">☰</div>
+
+    <!-- NOTIFICATION BELL — STUDENT -->
+    <div class="notif-bell-wrapper">
+      <button class="notif-bell-btn" onclick="toggleNotifDropdown('student', event)" title="Notifications">
+        🔔
+        <span class="notif-badge" id="studentNotifBadge" style="display:none">0</span>
+      </button>
+      <div class="notif-dropdown" id="studentNotifDropdown">
+        <div class="notif-header">
+          <span>🔔 Notifications</span>
+          <button class="notif-mark-read" onclick="markAllNotifsRead('student')">Mark all read</button>
+        </div>
+        <div class="notif-list" id="studentNotifList">
+          <div class="notif-empty">No notifications yet</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-dropdown-wrapper">
+      <div class="profile-icon" onclick="toggleStudentProfileDrop(event)">
+        <div class="avatar" id="studentNavInitials">SK</div>
+        <span class="profile-caret">▾</span>
+      </div>
+      <div class="profile-dropdown-menu" id="studentProfileMenu">
+        <div class="pdrop-header">
+          <div class="avatar lg" id="studentAvatarInitials">SK</div>
+          <div><strong id="profileDropName">Student</strong><small>Student</small></div>
+        </div>
+        <div class="pdrop-divider"></div>
+        <button class="pdrop-item" onclick="goToStudentProfile()">👤 Profile</button>
+        <button class="pdrop-item pdrop-logout" onclick="logout()">🔴 Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-layout">
+    <aside class="dash-sidebar" id="studentSidebar">
+      <nav class="sidebar-nav">
+        <button class="sidebar-btn active" onclick="switchStudentView('available', this)"><span>📋</span> Available Tasks</button>
+        <button class="sidebar-btn" onclick="switchStudentView('active', this)"><span>🔥</span> Active Tasks</button>
+        <button class="sidebar-btn" onclick="switchStudentView('submitted', this)"><span>📤</span> Submitted</button>
+        <button class="sidebar-btn" onclick="switchStudentView('completed', this)"><span>✅</span> Completed</button>
+      </nav>
+    </aside>
+
+    <div class="dash-body">
+      <div id="view-available" class="dash-view active">
+        <div class="dash-section">
+          <div class="filter-bar">
+            <h3>📋 Available Tasks</h3>
+            <div class="filter-tabs">
+              <button class="ftab active" onclick="filterTasks('all',this)">All</button>
+              <button class="ftab" onclick="filterTasks('codethali',this)">💻 CodeThali</button>
+              <button class="ftab" onclick="filterTasks('creatix',this)">🎨 Creatix</button>
+              <button class="ftab" onclick="filterTasks('quickbites',this)">⚡ QuickBites</button>
+              <button class="ftab" onclick="filterTasks('teamup',this)">🤝 TeamUp</button>
+            </div>
+          </div>
+          <div id="availableTasks" class="task-grid"></div>
+        </div>
+      </div>
+
+      <div id="view-active" class="dash-view">
+        <div class="dash-section">
+          <h3>🔥 Active Tasks</h3>
+          <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:18px">Tasks you've applied for. Upload your work file when done.</p>
+          <div class="task-list" id="studentActiveTasks">
+            <p style="color:var(--text-dim);text-align:center;padding:30px;">No active tasks yet. Apply for tasks to get started! 💪</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-submitted" class="dash-view">
+        <div class="dash-section">
+          <h3>📤 Submitted Work</h3>
+          <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:18px">Work submitted. Waiting for client approval and payment release.</p>
+          <div class="task-list" id="studentSubmittedTasks">
+            <p style="color:var(--text-dim);text-align:center;padding:30px;">No submitted tasks yet. Upload your work when ready! 📤</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-completed" class="dash-view">
+        <div class="dash-section">
+          <h3>✅ Completed Tasks</h3>
+          <div class="task-list" id="studentCompletedTasks">
+            <p style="color:var(--text-dim);text-align:center;padding:30px;">No completed tasks yet. Keep going! 🚀</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="taskModal" class="modal-overlay hidden">
+    <div class="modal-box task-detail">
+      <button class="modal-close" onclick="closeTaskModal()">✕</button>
+      <div id="taskDetailContent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STUDENT PROFILE ========== -->
+<section id="studentProfile" class="section dashboard">
+  <div class="dash-nav">
+    <div class="nav-logo">
+      <img src="l.jpeg" alt="SkillThali" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div style="display:none;align-items:center;gap:10px;"><div class="logo-circle">ST</div><span class="logo-text">SkillThali</span></div>
+    </div>
+    <button class="btn-ghost-sm" onclick="goBackToDash('student')" style="margin-left:auto;margin-right:16px">← Back to Dashboard</button>
+  </div>
+  <div class="profile-page-body">
+    <div class="profile-page-card">
+      <div class="avatar xl" id="profilePageInitials">SK</div>
+      <h2 id="profilePageName">Student</h2>
+      <p class="profile-email" id="profilePageEmail">📧 student@college.edu</p>
+      <div class="profile-page-stats">
+        <div class="pp-stat"><span class="pp-val" id="statActiveTasks">0</span><span class="pp-label">📌 Active Tasks</span></div>
+        <div class="pp-stat"><span class="pp-val" id="statCompletedTasks">0</span><span class="pp-label">✅ Completed</span></div>
+        <div class="pp-stat"><span class="pp-val">⭐ 5.0</span><span class="pp-label">Rating</span></div>
+        <div class="pp-stat"><span class="pp-val" id="statEarnings">₹0</span><span class="pp-label">💰 Earnings</span></div>
+        <div class="pp-stat"><span class="pp-val">📊</span><span class="pp-label">Active Days</span></div>
+      </div>
+      <!-- LinkedIn Edit Section -->
+      <div class="about-client" style="margin-top:20px;">
+        <h4>🔗 LinkedIn Profile</h4>
+        <p id="linkedinDisplayText" style="font-size:0.85rem;margin-bottom:10px;word-break:break-all;"></p>
+        <div class="form-group" style="margin-bottom:10px;">
+          <input type="url" id="linkedinUrlInput" placeholder="https://linkedin.com/in/your-profile" class="form-input" style="font-size:0.88rem;"/>
+        </div>
+        <button class="btn-primary" onclick="saveLinkedIn()" style="padding:9px 22px;font-size:0.88rem;">💾 Save LinkedIn</button>
+      </div>
+      <button class="btn-logout" onclick="logout()">🔴 Logout</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CLIENT DASHBOARD ========== -->
+<section id="clientDash" class="section dashboard">
+  <div class="dash-nav">
+    <div class="nav-logo" onclick="showSection('home')" style="cursor:pointer">
+      <img src="logo.jpeg" alt="SkillThali" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div style="display:none;align-items:center;gap:10px;"><div class="logo-circle">ST</div><span class="logo-text">SkillThali</span></div>
+    </div>
+    <div class="dash-greeting-inline" id="clientGreeting">Welcome back 👋</div>
+    <div class="dash-sidebar-toggle" onclick="toggleClientSidebar()">☰</div>
+
+    <!-- NOTIFICATION BELL — CLIENT -->
+    <div class="notif-bell-wrapper">
+      <button class="notif-bell-btn" onclick="toggleNotifDropdown('client', event)" title="Notifications">
+        🔔
+        <span class="notif-badge" id="clientNotifBadge" style="display:none">0</span>
+      </button>
+      <div class="notif-dropdown" id="clientNotifDropdown">
+        <div class="notif-header">
+          <span>🔔 Notifications</span>
+          <button class="notif-mark-read" onclick="markAllNotifsRead('client')">Mark all read</button>
+        </div>
+        <div class="notif-list" id="clientNotifList">
+          <div class="notif-empty">No notifications yet</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-dropdown-wrapper">
+      <div class="profile-icon" onclick="toggleClientProfileDrop(event)">
+        <div class="avatar" id="clientNavInitials">RC</div>
+        <span class="profile-caret">▾</span>
+      </div>
+      <div class="profile-dropdown-menu" id="clientProfileMenu">
+        <div class="pdrop-header">
+          <div class="avatar lg" id="clientAvatarInitials">RC</div>
+          <div><strong id="clientProfileDropName">Client</strong><small>Client</small></div>
+        </div>
+        <div class="pdrop-divider"></div>
+        <button class="pdrop-item" onclick="goToClientProfile()">👤 Profile</button>
+        <button class="pdrop-item pdrop-logout" onclick="logout()">🔴 Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-layout">
+    <aside class="dash-sidebar" id="clientSidebar">
+      <nav class="sidebar-nav">
+        <button class="sidebar-btn active" onclick="switchClientView('post', this)"><span>➕</span> Post Task</button>
+        <button class="sidebar-btn" onclick="switchClientView('posted', this)"><span>📌</span> Active Tasks</button>
+        <button class="sidebar-btn" onclick="switchClientView('submitted', this)"><span>📤</span> Review Work</button>
+        <button class="sidebar-btn" onclick="switchClientView('completed', this)"><span>✅</span> Completed</button>
+        <button class="sidebar-btn" onclick="switchClientView('applicants', this)"><span>👥</span> Applicants</button>
+      </nav>
+    </aside>
+
+    <div class="dash-body">
+      <div id="cview-post" class="dash-view active">
+        <div class="dash-section">
+          <h3>➕ Post a New Task</h3>
+          <div class="post-task-inline">
+            <div class="form-group"><input type="text" id="taskTitle" placeholder="Task Title" class="form-input"/></div>
+            <div class="form-group">
+              <select id="taskCategory" class="form-input">
+                <option value="">Select Category</option>
+                <option value="codethali">💻 CodeThali</option>
+                <option value="creatix">🎨 Creatix</option>
+                <option value="quickbites">⚡ QuickBites</option>
+                <option value="teamup">🤝 TeamUp</option>
+              </select>
+            </div>
+            <div class="form-group"><input type="number" id="taskBudget" placeholder="Budget (₹)" class="form-input"/></div>
+            <div class="form-group"><input type="text" id="taskSkills" placeholder="Required Skills (comma separated)" class="form-input"/></div>
+            <div class="form-group"><input type="text" id="taskLocation" placeholder="Your Location (e.g. Pune, MH)" class="form-input"/></div>
+            <div class="form-group"><textarea id="taskDesc" class="form-input" rows="3" placeholder="Describe the task..."></textarea></div>
+            <button class="btn-primary" onclick="submitTask()">Post Task →</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="cview-posted" class="dash-view">
+        <div class="dash-section">
+          <h3>📌 Active Tasks</h3>
+          <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:18px">Tasks that are open or assigned. Payment is triggered after student submits work.</p>
+          <div class="task-grid client-tasks" id="clientPostedTasks"></div>
+        </div>
+      </div>
+
+      <div id="cview-submitted" class="dash-view">
+        <div class="dash-section">
+          <h3>📤 Review Submitted Work</h3>
+          <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:18px">Students have submitted work with files. Pay to approve and release to student.</p>
+          <div class="task-list" id="clientSubmittedTasksList">
+            <p style="color:var(--text-dim);text-align:center;padding:30px;">No tasks submitted for review yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="cview-completed" class="dash-view">
+        <div class="dash-section">
+          <h3>✅ Completed Tasks</h3>
+          <div class="task-list" id="clientCompletedTasksList">
+            <p style="color:var(--text-dim);text-align:center;padding:30px;">No completed tasks yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="cview-applicants" class="dash-view">
+        <div class="dash-section">
+          <h3>👥 Applicants Dashboard</h3>
+          <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:18px">All tasks with applicant counts. Click "View Applicants" to see who applied.</p>
+          <div class="task-list" id="clientApplicantsList">
+            <p style="color:var(--text-dim);text-align:center;padding:30px;">No tasks posted yet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Applicants Detail Modal -->
+  <div id="applicantsModal" class="modal-overlay hidden">
+    <div class="modal-box" style="max-width:500px;">
+      <button class="modal-close" onclick="closeApplicantsModal()">✕</button>
+      <div id="applicantsModalContent"></div>
+    </div>
+  </div>
+
+  <div id="clientTaskModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeClientTaskModal()">✕</button>
+      <div id="clientTaskDetailContent" class="client-task-detail"></div>
+    </div>
+  </div>
+
+  <div id="postTaskModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closePostTask()">✕</button>
+      <h2>Post a New Task</h2>
+      <p>Fill in details so students can find and apply</p>
+      <div class="form-group"><input type="text" id="taskTitle2" placeholder="Task Title" class="form-input"/></div>
+      <div class="form-group">
+        <select id="taskCategory2" class="form-input">
+          <option value="">Select Category</option>
+          <option value="codethali">💻 CodeThali</option>
+          <option value="creatix">🎨 Creatix</option>
+          <option value="quickbites">⚡ QuickBites</option>
+          <option value="teamup">🤝 TeamUp</option>
+        </select>
+      </div>
+      <div class="form-group"><input type="number" id="taskBudget2" placeholder="Budget (₹)" class="form-input"/></div>
+      <div class="form-group"><input type="text" id="taskSkills2" placeholder="Required Skills (comma separated)" class="form-input"/></div>
+      <div class="form-group"><input type="text" id="taskLocation2" placeholder="Your Location (e.g. Pune, MH)" class="form-input"/></div>
+      <div class="form-group"><textarea id="taskDesc2" class="form-input" rows="3" placeholder="Describe the task..."></textarea></div>
+      <button class="btn-primary full" onclick="submitTask()">Post Task →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CLIENT PROFILE ========== -->
+<section id="clientProfile" class="section dashboard">
+  <div class="dash-nav">
+    <div class="nav-logo">
+      <img src="l.jpeg" alt="SkillThali" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div style="display:none;align-items:center;gap:10px;"><div class="logo-circle">ST</div><span class="logo-text">SkillThali</span></div>
+    </div>
+    <button class="btn-ghost-sm" onclick="goBackToDash('client')" style="margin-left:auto;margin-right:16px">← Back to Dashboard</button>
+  </div>
+  <div class="profile-page-body">
+    <div class="profile-page-card">
+      <div class="avatar xl" id="clientProfilePageInitials">RC</div>
+      <h2 id="clientProfilePageName">Client</h2>
+      <p class="profile-email" id="clientProfilePageEmail">📧 client@company.com</p>
+      <div class="profile-page-stats">
+        <div class="pp-stat"><span class="pp-val" id="clientStatActive">0</span><span class="pp-label">📌 Active Projects</span></div>
+        <div class="pp-stat"><span class="pp-val" id="clientStatCompleted">0</span><span class="pp-label">✅ Completed</span></div>
+      </div>
+      <div class="about-client">
+        <h4>🧠 About</h4>
+        <p>Welcome to SkillThali! Post tasks and connect with talented students to get quality work done fast.</p>
+      </div>
+      <button class="btn-logout" onclick="logout()">🔴 Logout</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ADMIN DASHBOARD ========== -->
+<section id="adminDash" class="section dashboard">
+  <div class="dash-nav admin-dash-nav">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="logo-circle">ST</div>
+      <span style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--white)">SkillThali</span>
+      <span class="admin-badge badge-purple" style="margin-left:4px">👑 Admin</span>
+    </div>
+    <div class="dash-greeting-inline" style="color:var(--purple)">Admin Control Panel</div>
+    <div class="dash-sidebar-toggle" onclick="toggleAdminSidebar()">☰</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="avatar" style="border-color:var(--purple);color:var(--purple)">AD</div>
+      <button class="btn-ghost-sm" onclick="logout()" style="color:var(--red);border-color:var(--red-border)">🔴 Logout</button>
+    </div>
+  </div>
+
+  <div class="dash-layout">
+    <aside class="dash-sidebar" id="adminSidebar">
+      <nav class="sidebar-nav">
+        <button class="sidebar-btn active" onclick="switchAdminView('overview', this)"><span>📊</span> Overview</button>
+        <button class="sidebar-btn" onclick="switchAdminView('earnings', this)"><span>💹</span> Earnings</button>
+        <button class="sidebar-btn" onclick="switchAdminView('transactions', this)"><span>💳</span> Transactions</button>
+        <button class="sidebar-btn" onclick="switchAdminView('users', this)"><span>👥</span> Users</button>
+      </nav>
+    </aside>
+
+    <div class="dash-body">
+      <!-- Overview -->
+      <div id="aview-overview" class="dash-view active">
+        <div class="admin-banner">
+          <div class="admin-banner-icon">👑</div>
+          <div class="admin-banner-text">
+            <h3>Admin Dashboard</h3>
+            <p>Full visibility into platform activity, payments, commissions, and users.</p>
+          </div>
+        </div>
+
+        <!-- Pending Payment Notifications -->
+        <div class="admin-notif-section">
+          <h4 class="admin-section-label">🔔 Pending Payment Releases</h4>
+          <div id="adminPendingPayNotifs">
+            <p style="color:var(--text-dim);font-size:0.85rem;padding:12px 0;">No pending payments.</p>
+          </div>
+        </div>
+
+        <div class="admin-stats-grid">
+          <div class="admin-stat-card money">
+            <div class="admin-stat-icon">💰</div>
+            <div class="admin-stat-value" id="adminTotalMoney">₹0</div>
+            <div class="admin-stat-label">Total Received</div>
+          </div>
+          <div class="admin-stat-card" style="border-color:rgba(192,132,252,0.3)">
+            <div class="admin-stat-icon">🏢</div>
+            <div class="admin-stat-value" id="adminPlatformEarnings" style="color:var(--purple)">₹0</div>
+            <div class="admin-stat-label">Platform Earnings</div>
+          </div>
+          <div class="admin-stat-card pending">
+            <div class="admin-stat-icon">⏳</div>
+            <div class="admin-stat-value" id="adminPendingStudents">₹0</div>
+            <div class="admin-stat-label">Pending to Students</div>
+          </div>
+          <div class="admin-stat-card released">
+            <div class="admin-stat-icon">✅</div>
+            <div class="admin-stat-value" id="adminReleasedStudents">₹0</div>
+            <div class="admin-stat-label">Released to Students</div>
+          </div>
+          <div class="admin-stat-card secured">
+            <div class="admin-stat-icon">🔒</div>
+            <div class="admin-stat-value" id="adminSecuredCount">0</div>
+            <div class="admin-stat-label">In Escrow</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon">📋</div>
+            <div class="admin-stat-value" id="adminTotalTasks">0</div>
+            <div class="admin-stat-label">Total Tasks</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon">👥</div>
+            <div class="admin-stat-value" id="adminTotalUsers">0</div>
+            <div class="admin-stat-label">Total Users</div>
+          </div>
+
+        </div>
+
+        <div class="admin-table-wrap">
+          <div class="admin-table-header">
+            <h3>💳 All Transactions</h3>
+            <span class="admin-badge badge-gray">Live Data</span>
+          </div>
+          <div class="admin-table-scroll">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Category</th>
+                  <th>Client</th>
+                  <th>Assigned To</th>
+                  <th>Amount</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminTransactionBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings View -->
+      <div id="aview-earnings" class="dash-view">
+        <div class="dash-section">
+          <h3>💹 Platform Earnings Breakdown</h3>
+          <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:24px">All payments with 25% platform fee breakdown (Client pays → Student gets 75% → Platform earns 25%).</p>
+          <div class="admin-table-wrap">
+            <div class="admin-table-scroll">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Client Paid</th>
+                    <th>Student Gets (75%)</th>
+                    <th>Platform Fee (25%)</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="adminEarningsView">
+                  <tr><td colspan="5" style="text-align:center;color:var(--text-dim);padding:30px;">No transactions yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transactions View -->
+      <div id="aview-transactions" class="dash-view">
+        <div class="dash-section">
+          <h3>💳 All Transactions</h3>
+          <div class="admin-table-wrap">
+            <div class="admin-table-scroll">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Category</th>
+                    <th>Client</th>
+                    <th>Assigned To</th>
+                    <th>Amount</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="adminTransactionBody2"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users View -->
+      <div id="aview-users" class="dash-view">
+        <div class="dash-section">
+          <h3>👥 Registered Users</h3>
+          <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:20px">All users registered on the platform.</p>
+          <div class="admin-users-grid" id="adminUsersList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
